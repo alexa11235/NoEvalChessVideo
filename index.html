@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player's Camera Without Eval</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="sidebar">
+            <h2>Live Games</h2>
+            
+            <div class="add-form">
+                <input type="text" id="gameName" placeholder="Name (e.g. Caruana - Naka)">
+                <input type="text" id="gameUrl" placeholder="YouTube Link">
+                <button id="addBtn">Add Game</button>
+            </div>
+
+            <ul id="gameList">
+                </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="video-wrapper" id="videoContainer">
+                
+                <div class="eval-mask"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

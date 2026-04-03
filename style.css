@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    background-color: #0f0f0f; 
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 300px;
+    background-color: #1a1a1a;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 1px solid #333;
+    overflow-y: auto;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.add-form input, .add-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.add-form input {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+.add-form button {
+    background-color: #3ea6ff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-form button:hover {
+    background-color: #65b8ff;
+}
+
+/* List Styles */
+ul#gameList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.game-item:hover {
+    background-color: #3a3a3a;
+}
+
+/* Updated Delete Button Styles */
+.delete-btn {
+    background-color: transparent; 
+    color: #6c849c; /* A muted slate blue/gray */
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.delete-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.delete-btn:hover {
+    color: #ff6b6b; /* Soft red warning only on hover */
+}
+
+/* Main Video Area */
+.main-content {
+    flex: 1; /* Takes up the remaining space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    background-color: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border: none;
+    display: none; /* Hides all players by default */
+}
+
+/* This class will be toggled by JS to show the selected game */
+.video-wrapper iframe.active {
+    display: block; 
+}
+
+/* The Evaluation Bar Mask */
+.eval-mask {
+    position: absolute;
+    background-color: black; /* Change this to #0f0f0f once positioned */
+    z-index: 9999; 
+    
+    top: 1.1%;      
+    left: 62.5%;      
+    width: 1.2%;     
+    height: 51.9%;   
+    
+    border: 1px solid #222; 
+    display: none; 
+}
