@@ -117,8 +117,7 @@ async function initGlobalData() {
             const currentRound = allGlobalGames[0].round;
             
             // Build your 3 specific options using that number
-            roundSelect.innerHTML = `
-                <option value="" disabled selected>Load Games...</option>
+           roundSelect.innerHTML = `
                 <option value="open">Round ${currentRound} - Open</option>
                 <option value="women">Round ${currentRound} - Women</option>
                 <option value="all">Round ${currentRound} - All</option>
