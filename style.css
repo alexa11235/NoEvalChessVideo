@@ -144,34 +144,35 @@ ul#gameList {
     display: block; 
 }
 
-/* Custom Fullscreen Button Styles (Updated position to right) */
+/* Custom Fullscreen Button Styles (Seamless YouTube Style) */
 .custom-fs-btn {
     position: absolute;
-    bottom: 60px; /* Safely above YouTube's control bar */
-    right: 20px; /* NOW ON THE RIGHT SIDE */
-    z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 12px; 
+    right: 16px; 
+    width: 44px;
+    height: 44px;
+    border-radius: 50%; /* Makes it circular */
+    background-color: transparent; /* YouTube buttons are transparent by default */
     color: #ffffff;
     border: none;
-    padding: 10px;
-    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
+    z-index: 10000;
+    transition: background-color 0.2s ease; /* Smooth fade like YouTube */
 }
 
 .custom-fs-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
 }
 
+/* YouTube's authentic subtle hover state */
 .custom-fs-btn:hover {
-    background-color: #3ea6ff; 
-    color: #000000; 
-    transform: scale(1.15); 
-    box-shadow: 0 4px 12px rgba(62, 166, 255, 0.5); 
+    background-color: rgba(255, 255, 255, 0.2); /* Faint white circular background */
+    transform: none; /* Removed the pop-out scale to keep it feeling native */
+    box-shadow: none; /* Removed the blue glow */
 }
 
 /* The Evaluation Bar Mask */
@@ -217,3 +218,5 @@ body.is-fullscreen .video-wrapper {
     aspect-ratio: 16 / 9; 
     box-shadow: none; /* Remove the glow effect */
 }
+
+
