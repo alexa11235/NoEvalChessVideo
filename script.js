@@ -117,7 +117,7 @@ async function initGlobalData() {
             
             // Re-inject the hidden title + the 3 specific options
             roundSelect.innerHTML = `
-                <option value="" disabled selected hidden>Load Games</option>
+                <option value="" disabled selected hidden>Load games...</option>
                 <option value="open">Round ${currentRound} - Open</option>
                 <option value="women">Round ${currentRound} - Women</option>
                 <option value="all">Round ${currentRound} - All</option>
