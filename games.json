@@ -1,10 +1,11 @@
 [
-    {
-        "name": "Caruana - Naka (Global)",
-        "videoId": "Ez4friJ-mjo"
-    },
-    {
-        "name": "Ding - Nepo (Global)",
-        "videoId": "W2TEKqCqPUM"
-    }
+  { "round": 5, "category": "open", "name": "Hikaru Nakamura — Javokhir Sindarov", "videoId": "ru-UnmNlvxQ" },
+  { "round": 5, "category": "open", "name": "Fabiano Caruana — Matthias Bluebaum", "videoId": "IzZrI5masGg" },
+  { "round": 5, "category": "open", "name": "Praggnanandhaa R — Andrey Esipenko", "videoId": "lIBgY-eHH2Q" },
+  { "round": 5, "category": "open", "name": "Anish Giri — Wei Yi", "videoId": "xPyIfgK7udc" },
+  { "round": 5, "category": "women", "name": "Aleksandra Goryachkina — Anna Muzychuk", "videoId": "liu08TReuG4" },
+  { "round": 5, "category": "women", "name": "Kateryna Lagno — Bibisara Assaubayeva", "videoId": "kw1M0vkM4O8" },
+  { "round": 5, "category": "women", "name": "Zhu Jiner — Vaishali Rameshbabu", "videoId": "QClOx08tO1I" },
+  { "round": 5, "category": "women", "name": "Tan Zhongyi — Divya Deshmukh", "videoId": "-r3vqlFIpgI" }
+	
 ]
