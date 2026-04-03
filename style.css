@@ -147,8 +147,8 @@ ul#gameList {
 /* Custom Fullscreen Button Styles (Seamless YouTube Style) */
 .custom-fs-btn {
     position: absolute;
-    bottom: 150px; 
-    right: 20px; 
+    bottom: 250px; 
+    right: 50px; 
     width: 40px;
     height: 40px;
     border-radius: 50%; /* Makes it circular */
