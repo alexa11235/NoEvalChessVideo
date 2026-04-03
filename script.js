@@ -113,23 +113,22 @@ async function initGlobalData() {
             allGlobalGames = await response.json();
             if (allGlobalGames.length === 0) return;
 
-            // Find the round number from the first game in your JSON
             const currentRound = allGlobalGames[0].round;
             
-            // Build your 3 specific options using that number
-           roundSelect.innerHTML = `
+            // Re-inject the hidden title + the 3 specific options
+            roundSelect.innerHTML = `
+                <option value="" disabled selected hidden>Load Games</option>
                 <option value="open">Round ${currentRound} - Open</option>
                 <option value="women">Round ${currentRound} - Women</option>
                 <option value="all">Round ${currentRound} - All</option>
             `;
 
-            // Make the menu actually do something when clicked
             roundSelect.addEventListener('change', (e) => {
                 loadSelectedCategory(e.target.value, currentRound);
             });
         }
     } catch (error) {
-        console.error("JSON not found.");
+        console.error("JSON Error");
     }
 }
 
