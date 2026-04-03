@@ -5,7 +5,7 @@ const addBtn = document.getElementById('addBtn');
 const gameList = document.getElementById('gameList');
 const videoContainer = document.getElementById('videoContainer'); // Target the container
 const evalMask = document.querySelector('.eval-mask');
-const customFsBtn = document.getElementById('customFsBtn'); // The new fullscreen button
+const customFsBtn = document.getElementById('customFsBtn'); // The custom fullscreen button
 
 function extractVideoId(url) {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -52,7 +52,9 @@ function switchVideo(gameId) {
     // 2. Loop through them, hit PAUSE, and hide them
     allIframes.forEach(iframe => {
         // This line sends a secure command into the iframe telling YouTube to pause
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        if (iframe.contentWindow) {
+            iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
         iframe.classList.remove('active');
     });
 
@@ -61,7 +63,9 @@ function switchVideo(gameId) {
     if (activeIframe) {
         activeIframe.classList.add('active');
         // This line tells the new video to resume playing automatically
-        activeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        if (activeIframe.contentWindow) {
+            activeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        }
     }
 }
 
@@ -84,7 +88,10 @@ addBtn.addEventListener('click', () => {
     newIframe.id = `iframe-${uniqueId}`;
     newIframe.className = 'player-iframe'; // Tag it so we can find it later
     newIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=1&enablejsapi=1`;
-    newIframe.allow = "autoplay"; // Removed native fullscreen permission!
+    
+    // SUCCESS: YouTube's default fullscreen button is disabled to prevent confusion!
+    newIframe.allow = "autoplay"; 
+    
     newIframe.referrerPolicy = "strict-origin-when-cross-origin";
     
     // Inject it into the container (it hides behind the mask automatically due to z-index)
@@ -120,7 +127,7 @@ function removeGame(gameId) {
     }
 }
 
-// --- NEW FEATURE: LOAD GLOBAL GAMES --- //
+// --- FEATURE: LOAD GLOBAL GAMES --- //
 
 async function loadGlobalGames() {
     try {
@@ -143,7 +150,10 @@ async function loadGlobalGames() {
                 newIframe.id = `iframe-${uniqueId}`;
                 newIframe.className = 'player-iframe';
                 newIframe.src = `https://www.youtube-nocookie.com/embed/${game.videoId}?autoplay=1&controls=1&enablejsapi=1`;
-                newIframe.allow = "autoplay"; // Removed native fullscreen permission!
+                
+                // SUCCESS: YouTube's default fullscreen button is disabled!
+                newIframe.allow = "autoplay"; 
+                
                 newIframe.referrerPolicy = "strict-origin-when-cross-origin";
                 
                 videoContainer.appendChild(newIframe);
@@ -167,26 +177,60 @@ async function loadGlobalGames() {
 loadGlobalGames();
 
 // --- FULLSCREEN LOGIC --- //
+
+// Updated: Icons now intuitivley point towards the bottom-right corner
 const expandIcon = `
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        <path d="M15 15l6 6M15 21h6v-6M9 3H3v6M3 3l7 7"/>
     </svg>`;
     
 const shrinkIcon = `
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/>
+        <path d="M14 14h6v6M20 4v6h-6M10 14l-7 7M14 10l7-7"/>
     </svg>`;
 
-customFsBtn.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-        videoContainer.requestFullscreen().catch(err => {
-            console.error(`Error attempting to enable fullscreen: ${err.message}`);
-        });
-        // Swap to inward arrows
+function toggleFullscreen() {
+    // Bulletproof compatibility for standard browsers, Safari/Apple, and older Edge/Microsoft
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        // Enter Fullscreen: We fullscreen the whole webpage so we can hide the sidebar
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Fullscreen request rejected by Chrome security. Site must be live on https:// to test correctly. ${err.message}`);
+            });
+        } else if (document.documentElement.webkitRequestFullscreen) { /* Safari/iOS */
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+            document.documentElement.msRequestFullscreen();
+        }
+    } else {
+        // Exit Fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+    }
+}
+
+// 1. The custom button click
+customFsBtn.addEventListener('click', toggleFullscreen);
+
+// 2. The Keyboard 'Esc' key listener (Catches if the user exits via keyboard)
+document.addEventListener('fullscreenchange', handleFsChange);
+document.addEventListener('webkitfullscreenchange', handleFsChange); // Safari
+document.addEventListener('MSFullscreenChange', handleFsChange); // Edge/IE
+
+function handleFsChange() {
+    // Check if ANY standard or vendor-specific fullscreen element is active
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+        // entering fullscreen
+        document.body.classList.add('is-fullscreen');
         customFsBtn.innerHTML = shrinkIcon; 
     } else {
-        document.exitFullscreen();
-        // Swap back to outward arrows
+        // exiting fullscreen
+        document.body.classList.remove('is-fullscreen');
         customFsBtn.innerHTML = expandIcon; 
     }
-});
+}
