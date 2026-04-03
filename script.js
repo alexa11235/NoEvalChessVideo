@@ -1,12 +1,11 @@
 let games = [];
-
-// DOM Elements
 const nameInput = document.getElementById('gameName');
 const urlInput = document.getElementById('gameUrl');
 const addBtn = document.getElementById('addBtn');
 const gameList = document.getElementById('gameList');
 const videoContainer = document.getElementById('videoContainer'); // Target the container
 const evalMask = document.querySelector('.eval-mask');
+const customFsBtn = document.getElementById('customFsBtn'); // The new fullscreen button
 
 function extractVideoId(url) {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -85,7 +84,7 @@ addBtn.addEventListener('click', () => {
     newIframe.id = `iframe-${uniqueId}`;
     newIframe.className = 'player-iframe'; // Tag it so we can find it later
     newIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=1&enablejsapi=1`;
-    newIframe.allow = "autoplay; fullscreen";
+    newIframe.allow = "autoplay"; // Removed native fullscreen permission!
     newIframe.referrerPolicy = "strict-origin-when-cross-origin";
     
     // Inject it into the container (it hides behind the mask automatically due to z-index)
@@ -144,7 +143,7 @@ async function loadGlobalGames() {
                 newIframe.id = `iframe-${uniqueId}`;
                 newIframe.className = 'player-iframe';
                 newIframe.src = `https://www.youtube-nocookie.com/embed/${game.videoId}?autoplay=1&controls=1&enablejsapi=1`;
-                newIframe.allow = "autoplay; fullscreen";
+                newIframe.allow = "autoplay"; // Removed native fullscreen permission!
                 newIframe.referrerPolicy = "strict-origin-when-cross-origin";
                 
                 videoContainer.appendChild(newIframe);
@@ -166,3 +165,28 @@ async function loadGlobalGames() {
 
 // Run this function the moment the script loads
 loadGlobalGames();
+
+// --- FULLSCREEN LOGIC --- //
+const expandIcon = `
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+    </svg>`;
+    
+const shrinkIcon = `
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/>
+    </svg>`;
+
+customFsBtn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        videoContainer.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+        // Swap to inward arrows
+        customFsBtn.innerHTML = shrinkIcon; 
+    } else {
+        document.exitFullscreen();
+        // Swap back to outward arrows
+        customFsBtn.innerHTML = expandIcon; 
+    }
+});
