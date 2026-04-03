@@ -12,22 +12,19 @@
     <div class="app-container">
         <div class="sidebar">
             <h2>Candidates 2026</h2>
-
-            <div class="load-menu">
-                <label for="roundSelect">Load Games</label>
-                <select id="roundSelect">
-                    <option value="" disabled selected>Loading...</option>
-                </select>
-            </div>
             
-            <div class="add-form">
+            <div class="load-menu">
+                <select id="roundSelect">
+                    </select>
+            </div>
+        
+            <ul id="gameList"></ul>
+        
+            <div class="add-form" style="margin-top: auto; padding-top: 20px;">
                 <input type="text" id="gameName" placeholder="Name (e.g. Caruana - Naka)">
                 <input type="text" id="gameUrl" placeholder="YouTube Link">
                 <button id="addBtn">Add Game</button>
             </div>
-
-            <ul id="gameList">
-                </ul>
         </div>
 
         <div class="main-content">
