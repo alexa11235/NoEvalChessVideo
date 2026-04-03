@@ -178,15 +178,16 @@ loadGlobalGames();
 
 // --- FULLSCREEN LOGIC --- //
 
-// Updated: Icons now intuitivley point towards the bottom-right corner
+// Authentic YouTube Material Design "Expand" Icon
 const expandIcon = `
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 15l6 6M15 21h6v-6M9 3H3v6M3 3l7 7"/>
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
     </svg>`;
     
+// Authentic YouTube Material Design "Minimize" Icon
 const shrinkIcon = `
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 14h6v6M20 4v6h-6M10 14l-7 7M14 10l7-7"/>
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
     </svg>`;
 
 function toggleFullscreen() {
