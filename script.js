@@ -6,6 +6,8 @@ const gameList = document.getElementById('gameList');
 const videoContainer = document.getElementById('videoContainer');
 const evalMask = document.querySelector('.eval-mask');
 const customFsBtn = document.getElementById('customFsBtn');
+let allGlobalGames = []; 
+const roundSelect = document.getElementById('roundSelect');
 
 function extractVideoId(url) {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -104,34 +106,62 @@ function removeGame(gameId) {
     }
 }
 
-async function loadGlobalGames() {
+async function initGlobalData() {
     try {
         const response = await fetch('games.json');
         if (response.ok) {
-            const globalGames = await response.json();
-            globalGames.forEach(game => {
-                const uniqueId = Date.now().toString() + Math.random().toString(36).substr(2, 5);
-                games.push({ id: uniqueId, name: game.name, videoId: game.videoId });
-                
-                const newIframe = document.createElement('iframe');
-                newIframe.id = `iframe-${uniqueId}`;
-                newIframe.className = 'player-iframe';
-                newIframe.src = `https://www.youtube-nocookie.com/embed/${game.videoId}?autoplay=1&controls=1&enablejsapi=1`;
-                newIframe.allow = "autoplay"; 
-                newIframe.referrerPolicy = "strict-origin-when-cross-origin";
-                videoContainer.appendChild(newIframe);
+            allGlobalGames = await response.json();
+            if (allGlobalGames.length === 0) return;
+
+            // Find the round number from the first game in your JSON
+            const currentRound = allGlobalGames[0].round;
+            
+            // Build your 3 specific options using that number
+            roundSelect.innerHTML = `
+                <option value="" disabled selected>Load Games...</option>
+                <option value="open">Round ${currentRound} - Open</option>
+                <option value="women">Round ${currentRound} - Women</option>
+                <option value="all">Round ${currentRound} - All</option>
+            `;
+
+            // Make the menu actually do something when clicked
+            roundSelect.addEventListener('change', (e) => {
+                loadSelectedCategory(e.target.value, currentRound);
             });
-            renderGames();
-            if (games.length > 0) {
-                switchVideo(games[0].id);
-            }
         }
     } catch (error) {
-        console.error("No global games found.", error);
+        console.error("JSON not found.");
     }
 }
 
-loadGlobalGames();
+function loadSelectedCategory(category, targetRound) {
+    // 1. Clear current games and iframes
+    games = [];
+    document.querySelectorAll('.player-iframe').forEach(f => f.remove());
+    
+    // 2. Filter from the JSON
+    const filtered = allGlobalGames.filter(g => {
+        if (category === 'all') return g.round === targetRound;
+        return g.round === targetRound && g.category.toLowerCase() === category;
+    });
+
+    // 3. Create the iframes (using your existing logic)
+    filtered.forEach(game => {
+        const uniqueId = Date.now().toString() + Math.random().toString(36).substr(2, 5);
+        games.push({ id: uniqueId, name: game.name, videoId: game.videoId });
+        const newIframe = document.createElement('iframe');
+        newIframe.id = `iframe-${uniqueId}`;
+        newIframe.className = 'player-iframe';
+        newIframe.src = `https://www.youtube-nocookie.com/embed/${game.videoId}?autoplay=1&controls=1&enablejsapi=1`;
+        newIframe.allow = "autoplay"; 
+        videoContainer.appendChild(newIframe);
+    });
+
+    renderGames();
+    if (games.length > 0) switchVideo(games[0].id);
+}
+
+initGlobalData();
 
 // --- FULLSCREEN LOGIC --- //
 function toggleFullscreen() {
