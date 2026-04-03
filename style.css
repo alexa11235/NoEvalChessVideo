@@ -147,8 +147,8 @@ ul#gameList {
 /* Custom Fullscreen Button Styles (Seamless YouTube Style) */
 .custom-fs-btn {
     position: absolute;
-    bottom: 12px; 
-    right: 16px; 
+    bottom: 15px; 
+    right: 17px; 
     width: 44px;
     height: 44px;
     border-radius: 50%; /* Makes it circular */
@@ -164,8 +164,8 @@ ul#gameList {
 }
 
 .custom-fs-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
 }
 
 /* YouTube's authentic subtle hover state */
