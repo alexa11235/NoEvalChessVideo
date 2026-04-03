@@ -144,11 +144,11 @@ ul#gameList {
     display: block; 
 }
 
-/* Custom Fullscreen Button Styles */
+/* Custom Fullscreen Button Styles (Updated position to right) */
 .custom-fs-btn {
     position: absolute;
     bottom: 60px; /* Safely above YouTube's control bar */
-    left: 20px;
+    right: 20px; /* NOW ON THE RIGHT SIDE */
     z-index: 10000;
     background-color: rgba(0, 0, 0, 0.6);
     color: #ffffff;
@@ -187,4 +187,33 @@ ul#gameList {
     
     border: 1px solid #222; 
     display: none; 
+}
+
+/* --- THE BULLETPROOF FULLSCREEN OVERRIDE --- */
+body.is-fullscreen .sidebar {
+    display: none; /* Make the sidebar vanish */
+}
+
+body.is-fullscreen .app-container {
+    display: block; /* Remove the flex layout */
+}
+
+body.is-fullscreen .main-content {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000; /* Black out the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.is-fullscreen .video-wrapper {
+    /* Scale to maximum size while strictly keeping the 16:9 shape */
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9; 
+    box-shadow: none; /* Remove the glow effect */
 }
