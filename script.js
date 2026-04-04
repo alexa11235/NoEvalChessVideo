@@ -8,6 +8,9 @@ const evalMask = document.querySelector('.eval-mask');
 const customFsBtn = document.getElementById('customFsBtn');
 let allGlobalGames = []; 
 const roundSelect = document.getElementById('roundSelect');
+const sidebarWrapper = document.getElementById('sidebarWrapper');
+const sidebarToggle = document.getElementById('sidebarToggle');
+let idleTimer;
 
 function extractVideoId(url) {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -21,7 +24,8 @@ function renderGames() {
         const li = document.createElement('li');
         li.className = 'game-item';
         const nameSpan = document.createElement('span');
-        nameSpan.innerText = game.name;
+        const formattedName = game.name.replace(/\s*[-—]\s*/g, '<br>');
+        nameSpan.innerHTML = formattedName;
         nameSpan.style.flex = "1";
         nameSpan.onclick = () => switchVideo(game.id); 
         
@@ -63,6 +67,9 @@ function switchVideo(gameId) {
         // SHOW UI ELEMENTS: Only when a video is actually activated
         evalMask.style.display = 'block';
         customFsBtn.style.display = 'flex';
+        
+        // Kickstart the YouTube-style idle timer immediately when a new video loads
+        wakeUpControls(); 
     }
 }
 
@@ -190,3 +197,24 @@ function handleFsChange() {
         document.body.classList.remove('is-fullscreen');
     }
 }
+sidebarToggle.addEventListener('click', () => {
+    sidebarWrapper.classList.toggle('collapsed');
+});
+
+function wakeUpControls() {
+    if (evalMask.style.display === 'block') {
+        customFsBtn.classList.remove('fade-out');
+        clearTimeout(idleTimer);
+        
+        idleTimer = setTimeout(() => {
+            customFsBtn.classList.add('fade-out');
+        }, 2500); 
+    }
+}
+
+videoContainer.addEventListener('mousemove', wakeUpControls);
+
+videoContainer.addEventListener('mouseleave', () => {
+    clearTimeout(idleTimer);
+    customFsBtn.classList.add('fade-out');
+});
