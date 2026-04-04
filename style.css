@@ -243,5 +243,65 @@ body.is-fullscreen .video-wrapper {
     font-weight: bold;
     cursor: pointer;
 }
+.sidebar-wrapper {
+    position: relative;
+    height: 100vh;
+    z-index: 100;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 0;
+}
+
+.sidebar-wrapper.collapsed {
+    margin-left: -300px; 
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    right: -14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: 1000;
+    transition: opacity 0.2s ease, transform 0.3s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.sidebar-toggle svg { 
+    width: 16px; 
+    height: 16px; 
+}
+
+.sidebar-wrapper:hover .sidebar-toggle, 
+.sidebar-toggle:hover {
+    opacity: 1;
+}
+
+.sidebar-wrapper.collapsed .sidebar-toggle {
+    opacity: 1;
+    transform: rotate(180deg);
+    right: -35px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border-color: #444;
+}
+
+.game-item span {
+    line-height: 1.4;
+    padding-right: 10px;
+}
+
+.custom-fs-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
 
 
