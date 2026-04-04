@@ -8,25 +8,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="app-container">
-        <div class="sidebar">
-            <h2>Candidates 2026</h2>
+        <div class="sidebar-wrapper" id="sidebarWrapper">
             
-            <div class="load-menu">
-                <select id="roundSelect">
-                    <option value="" disabled selected hidden>Load games...</option>
-                </select>
+            <div class="sidebar">
+                <h2>Tournament Dashboard</h2>
+                
+                <div class="load-menu">
+                    <select id="roundSelect">
+                        <option value="" disabled selected hidden>Load Games</option>
+                    </select>
+                </div>
+
+                <ul id="gameList"></ul>
+
+                <div class="add-form">
+                    <input type="text" id="gameName" placeholder="Manual Add: Name">
+                    <input type="text" id="gameUrl" placeholder="YouTube Link">
+                    <button id="addBtn">Add Game</button>
+                </div>
             </div>
-        
-            <ul id="gameList"></ul>
-        
-            <div class="add-form" style="margin-top: auto; padding-top: 20px;">
-                <input type="text" id="gameName" placeholder="Name (e.g. Caruana - Naka)">
-                <input type="text" id="gameUrl" placeholder="YouTube Link">
-                <button id="addBtn">Add Game</button>
-            </div>
-        </div>
+
+            <button id="sidebarToggle" class="sidebar-toggle" title="Toggle Sidebar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            
+        </div> 
 
         <div class="main-content">
             <div class="video-wrapper" id="videoContainer">
