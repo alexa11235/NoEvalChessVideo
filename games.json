@@ -1,11 +1,11 @@
 [
-  { "round": 9, "category": "open", "name": "Praggnanandhaa R — Wei Yi", "videoId": "ysNmLhQOzu4" },
-  { "round": 9, "category": "open", "name": "Matthias Bluebaum — Javokhir Sindarov", "videoId": "Y2IAYWypsac" },
-  { "round": 9, "category": "open", "name": "Fabiano Caruana — Anish Giri", "videoId": "EgViCajZ4g0" },
-  { "round": 9, "category": "open", "name": "Hikaru Nakamura — Andrey Esipenko", "videoId": "AIRGdUm-rs0" },
-  { "round": 9, "category": "women", "name": "Tan Zhongyi — Anna Muzychuk", "videoId": "ptcn-BiYNdE" },
-  { "round": 9, "category": "women", "name": "Aleksandra Goryachkina — Bibisara Assaubayeva", "videoId": "X6JAG3D7pPg" },
-  { "round": 9, "category": "women", "name": "Vaishali Rameshbabu — Divya Deshmukh", "videoId": "2YZ-lzuOq40" },
-  { "round": 9, "category": "women", "name": "Zhu Jiner — Kateryna Lagno", "videoId": "13BDQJDZfls" }
+  { "round": 10, "category": "open", "name": "Javokhir Sindarov — Praggnanandhaa R", "videoId": "BDah6ft9rHY" },
+  { "round": 10, "category": "open", "name": "Anish Giri — Hikaru Nakamura", "videoId": "OOForAd5-9w" },
+  { "round": 10, "category": "open", "name": "Wei Yi — Fabiano Caruana", "videoId": "L5nsiEf_pGA" },
+  { "round": 10, "category": "open", "name": "Andrey Esipenko — Matthias Bluebaum", "videoId": "moslWSRTmMY" },
+  { "round": 10, "category": "women", "name": "Anna Muzychuk — Vaishali Rameshbabu", "videoId": "yHDPgRzyxhM" },
+  { "round": 10, "category": "women", "name": "Kateryna Lagno — Tan Zhongyi", "videoId": "wIW-O0Fjk_c" },
+  { "round": 10, "category": "women", "name": "Bibisara Assaubayeva — Zhu Jiner", "videoId": "9285WU7u5J4" },
+  { "round": 10, "category": "women", "name": "Divya Deshmukh — Aleksandra Goryachkina", "videoId": "91wyR5JBjWU" }
 	
 ]
