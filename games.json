@@ -1,11 +1,11 @@
 [
-  { "round": 12, "category": "open", "name": "Wei Yi — Anish Giri", "videoId": "r-D6ZfEMHXU" },
-  { "round": 12, "category": "open", "name": "Javokhir Sindarov — Hikaru Nakamura", "videoId": "iA7w_ULxSIE" },
-  { "round": 12, "category": "open", "name": "Matthias Bluebaum — Fabiano Caruana", "videoId": "9v5v-eNdM_w" },
-  { "round": 12, "category": "open", "name": "Andrey Esipenko — Praggnanandhaa R", "videoId": "0NQYy6HdiO0" },
-  { "round": 12, "category": "women", "name": "Bibisara Assaubayeva — Kateryna Lagno", "videoId": "mcQh94_ByGU" },
-  { "round": 12, "category": "women", "name": "Anna Muzychuk — Aleksandra Goryachkina", "videoId": "PLgvr21x4TI" },
-  { "round": 12, "category": "women", "name": "Divya Deshmukh — Tan Zhongyi", "videoId": "GMDZOikMqZI" },
-  { "round": 12, "category": "women", "name": "Vaishali Rameshbabu — Zhu Jiner", "videoId": "9UE_arnpD2M" }
+  { "round": 13, "category": "open", "name": "Anish Giri — Javokhir Sindarov", "videoId": "EEhGXWP7XPY" },
+  { "round": 13, "category": "open", "name": "Fabiano Caruana — Praggnanandhaa R", "videoId": "KMUjy1T-9vM" },
+  { "round": 13, "category": "open", "name": "Hikaru Nakamura — Matthias Bluebaum", "videoId": "7u9zRjq3ePw" },
+  { "round": 13, "category": "open", "name": "Wei Yi — Andrey Esipenko", "videoId": "RQ-6mxTxAto" },
+  { "round": 13, "category": "women", "name": "Bibisara Assaubayeva — Anna Muzychuk", "videoId": "yNEVF0amtz0" },
+  { "round": 13, "category": "women", "name": "Tan Zhongyi — Vaishali Rameshbabu", "videoId": "G3RNFAkjkPg" },
+  { "round": 13, "category": "women", "name": "Kateryna Lagno — Divya Deshmukh", "videoId": "cPjiAgZkYSY" },
+  { "round": 13, "category": "women", "name": "Zhu Jiner — Aleksandra Goryachkina", "videoId": "rAW2XirY23k" }
 	
 ]
